@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ADTConnect
 
-## Getting Started
+### Integrated Learning Conference Platform with Self-Tracking and Collaborative Resources
 
-First, run the development server:
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Problem Statement](#problem-statement)
+- [Proposed Solution](#proposed-solution)
+- [Scope and Feasibility](#scope-and-feasibility)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributors](#contributors)
+- [License](#license)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project Overview
+**ADTConnect** is an integrated digital learning platform designed for MIT ADT University. It centralizes online lectures, provides automated attendance tracking, and offers access to educational resources in a unified, user-friendly interface. The platform aims to streamline the learning experience, enhance communication, and improve resource management for students and educators.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Problem Statement
+Students and educators at MIT ADT University face challenges managing online lectures, educational resources, and communication through disjointed platforms. This results in:
+- Ineffective communication.
+- Unreliable attendance tracking.
+- Fragmented resource management.
+- Lack of a centralized platform for students to access and manage their academic content efficiently.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Proposed Solution
+ADTConnect will:
+- Centralize all online lectures, attendance tracking, and educational resources.
+- Use **Node.js with Express** for the backend, enabling real-time processing and API integrations.
+- Utilize **React** for the frontend to provide an intuitive and seamless user experience.
+- Regularly update based on user feedback to ensure continuous improvement.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scope and Feasibility
+The platform is designed to enhance user experience by:
+- Offering personalized dashboards.
+- Sending real-time notifications for important updates.
+- Allowing seamless integration with existing online meeting platforms and databases.
 
-## Learn More
+By using Node.js and Express for efficient backend development and React for a dynamic frontend, this project is both feasible and scalable for deployment at MIT ADT University.
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
+- **Frontend:** React
+- **Backend:** Node.js with Express
+- **Database:** MongoDB
+- **Others:** Integration with existing online meeting platforms
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Installation
+To set up the project locally, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/akashgupta-git/ADTConnect.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd ADTConnect
+   ```
+3. Install the necessary dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-## Deploy on Vercel
+## Usage
+Once the server is running, you can:
+- Access the dashboard to manage online lectures.
+- Track attendance automatically during lectures.
+- Access educational resources through a centralized platform.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Make sure to configure the backend services and databases as per the instructions provided in the `backend` directory.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributors
+This project is developed by:
+- Saket Firake
+- Aditi Kotwal
+- Akash Gupta
+- Disha Karnawat
+
+
+**Faculty Guide:**
+- Prof. Mohini Kumbhar, MIT School of Computing
+
+## License
+This project is currently free to use. See the `LICENSE` file for more details.
+
+---
