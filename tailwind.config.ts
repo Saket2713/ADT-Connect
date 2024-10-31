@@ -18,6 +18,9 @@ const config: Config = {
 				1:'#0E78F9',
 				
 			},
+			backgroundImage:{
+				hero: "uel('/images/hero-background.png')",
+			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
