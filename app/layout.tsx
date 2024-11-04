@@ -20,7 +20,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "YOOM",
+  title: "ADT-Connect",
   description: "Video calling app",
   icons:{
     icon:'/icons/logo.svg'
