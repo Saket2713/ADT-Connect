@@ -99,6 +99,13 @@ const MeetingTypeList = () => {
         className="bg-yellow-1"
         handleClick={() => router.push('/recordings')}
       />
+      <HomeCard
+        img="/icons/recordings.svg"
+        title="Resources"
+        description="Resources"
+        className="bg-green-600"
+        handleClick={() => router.push('/resources')}
+      />
 
       {!callDetail ? (
         <MeetingModal

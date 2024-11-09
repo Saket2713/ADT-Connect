@@ -1,7 +1,6 @@
 // FileUploader.tsx
 'use client'
 import React, { useState } from "react";
-
 import { ID } from "appwrite";
 import storage from "@/lib/AppwriteClient";
 
@@ -21,7 +20,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onUploadSuccess }) => {
     setError(null);
 
     try {
-      await storage.createFile("672eeb38002d9aa86f17", ID.unique(), file);
+      await storage.createFile(process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!, ID.unique(), file);
       setFile(null);
       onUploadSuccess();
     } catch (error) {
