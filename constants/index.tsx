@@ -23,6 +23,11 @@ export const sidebarLinks = [
         label: 'Personal Room',
         route: '/personal-room',
         imgUrl: '/icons/add-personal.svg',
+    },
+    {
+        label: 'Resources',
+        route: '/resources',
+        imgUrl: '/icons/book.svg',
     }
     
 ]
