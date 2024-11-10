@@ -102,7 +102,7 @@ const MeetingTypeList = () => {
       <HomeCard
         img="/icons/recordings.svg"
         title="Resources"
-        description="Resources"
+        description="Study Material"
         className="bg-green-600"
         handleClick={() => router.push('/resources')}
       />
