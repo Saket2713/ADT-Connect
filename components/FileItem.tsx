@@ -1,4 +1,3 @@
-// FileItem.tsx
 'use client'
 import React from "react";
 import storage from "@/lib/AppwriteClient"; 
@@ -10,22 +9,50 @@ interface FileItemProps {
 
 const FileItem: React.FC<FileItemProps> = ({ file, onDelete }) => {
   const handlePreviewFile = () => {
-    const url = storage.getFileView("672eeb38002d9aa86f17", file.$id);
-    const googleDocsUrl = `https://docs.google.com/viewerng/viewer?url=${encodeURIComponent(url)}`;
-    window.open(
-      file.mimeType.includes("pdf") ? url : googleDocsUrl,
-      "_blank"
-    );
+    try {
+      const url = storage.getFileView(process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!, file.$id);
+      const mimeType = file.mimeType;
+
+      if (mimeType.startsWith("image/")) {
+        window.open(url, "_blank");
+      } else if (mimeType === "application/pdf") {
+        const googleDocsUrl = `https://docs.google.com/viewerng/viewer?url=${encodeURIComponent(url)}`;
+        window.open(googleDocsUrl, "_blank");
+      } else if (mimeType.startsWith("video/") || mimeType.startsWith("audio/")) {
+        window.open(url, "_blank");
+      } else if (["application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
+                  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                  "application/msword", "application/vnd.ms-powerpoint",
+                  "application/vnd.ms-excel"].includes(mimeType)) {
+        const officeViewerUrl = `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(url)}`;
+        window.open(officeViewerUrl, "_blank");
+      } else if (["text/plain", "application/json", "application/javascript", "text/html", 
+                  "application/xml", "text/csv", "text/markdown"].includes(mimeType) ||
+                 mimeType.startsWith("text/")) {
+        window.open(url, "_blank");
+      } else {
+        window.open(url, "_blank");
+      }
+    } catch (error) {
+      console.error("Error previewing file:", error);
+      alert("Failed to preview file. Please try again.");
+    }
   };
 
   const handleDownloadFile = () => {
-    const url = storage.getFileDownload("672eeb38002d9aa86f17", file.$id);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = file.name;
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
+    try {
+      const url = storage.getFileDownload(process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!, file.$id);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = file.name;
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+      alert("Failed to download file. Please try again.");
+    }
   };
 
   return (
@@ -54,6 +81,9 @@ const FileItem: React.FC<FileItemProps> = ({ file, onDelete }) => {
         </button>
       </div>
     </div>
+
+
+
   );
 };
 
