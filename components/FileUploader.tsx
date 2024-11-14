@@ -1,63 +1,52 @@
 
-'use client';
-import React, { useState } from 'react';
-import storage from '@/lib/AppwriteClient';
+'use client'
+import React, { useState } from "react";
+import { ID } from "appwrite";
+import storage from "@/lib/AppwriteClient";
 
 interface FileUploaderProps {
   onUploadSuccess: () => void;
 }
 
 const FileUploader: React.FC<FileUploaderProps> = ({ onUploadSuccess }) => {
-  const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (!files) return;
+  const handleUploadFile = async () => {
+    if (!file) return;
 
     setLoading(true);
     setError(null);
 
     try {
-      for (const file of files) {
-        if (file.size > 5 * 1024 * 1024) {
-          alert('File is too large. Max size is 5MB.');
-          continue;
-        }
-
-        if (!['image/jpeg', 'image/png'].includes(file.type)) {
-          alert('Only JPG and PNG files are allowed');
-          continue;
-        }
-
-        await storage.createFile(
-          process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!,
-          file.name,
-          file
-        );
-      }
-      console.log('Files uploaded successfully');
+      await storage.createFile(process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!, ID.unique(), file);
+      setFile(null);
       onUploadSuccess();
     } catch (error) {
-      setError('Failed to upload files. Please try again.');
-      console.error('File upload error:', error);
+      console.error("Error uploading file:", error);
+      setError("Failed to upload file.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="file-uploader-container flex flex-col items-center space-y-4 mt-6">
+    <div>
       <input
+        placeholder="file"
         type="file"
-        onChange={handleFileUpload}
-        disabled={loading}
-        multiple
-        className="file-input bg-gray-800 text-white p-2 rounded w-full max-w-md text-sm md:text-base"
-        placeholder="Upload files"
+        className="p-2 text-white mb-4 bg-gray-700 rounded"
+        onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
       />
-      {loading && <p className="text-blue-500 text-sm md:text-base">Uploading...</p>}
-      {error && <p className="text-red-500 text-sm md:text-base">{error}</p>}
+      <button
+        onClick={handleUploadFile}
+        disabled={loading}
+        className="ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-500"
+      >
+        {loading ? "Uploading..." : "Upload File"}
+      </button>
+      {error && <p className="text-red-500 mt-4">{error}</p>}
     </div>
   );
 };
